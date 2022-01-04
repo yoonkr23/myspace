@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<title>계산 </title>
+<script src="./js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	$('ul.detail_tab li').click(function() {
+		
+		var activeTab = $(this).attr('data-tab');
+		
+		clear();
+		
+		$('ul.detail_tab li').removeClass('current');
+		$('.detail_tabContent').removeClass('current');
+		
+		$(this).addClass('current');
+		$('#' + activeTab).addClass('current');
+	});
+	
+	$("input[name='btnCal']").click(function() {
+		
+		var aliasId = $(this).attr('id');
+		
+		if($("#" + aliasId + "count").val() == 0) {
+			alert("주문수량을 입력하세요.");
+			$("#" + aliasId + "count").focus();
+			return false;
+		}
+		
+		if($("#" + aliasId + "wallHeight").val() > 2100 || $("#" + aliasId + "wallHeight").val() < 700) {
+			alert("폭은 700mm에서 2100mm 범위내의 숫자만 입력가능합니다.");
+			$("#" + aliasId + "wallHeight").focus();
+			return false;
+		}
+		
+		
+		/*
+		if($("#" + aliasId + "width").val() == 0) {
+			alert("시공면의 가로길이를 입력하세요.");
+			$("#" + aliasId + "width").focus();
+			return false;
+		}
+		*/
+		
+		cal($("#" + aliasId + "wallHeight").val(), $("#" + aliasId + "width").val(), aliasId, $("#" + aliasId + "count").val());
+	});
+	
+});
+
+function cal(wallHeight, width, aliasId, count) {
+	
+	var product = '';
+	var temp_cal = Math.ceil(width/1000);
+
+	if ( wallHeight > 700 && wallHeight <= 1000 ) {
+		product = 1000;
+	}
+	if ( wallHeight > 1000 && wallHeight <= 1250 ) {
+		product = 1250;
+	}
+	if ( wallHeight > 1250 && wallHeight <= 2100 ) {
+		product = 2100;
+	}
+	$("#" + aliasId + "product").html(product + " mm x ");
+	$("#" + aliasId + "quantityOp").html(temp_cal * count);
+
+	
+}
+
+function clear() {
+	$("input[name='wallHeight']").val('');
+	$("input[name='width']").val('');
+	$("input[name='count']").val('');
+	$("span[name='product']").html('');
+	$("span[name='quantityOp']").html('0');
+}
+
+</script>
+
+<style>
+@charset "utf-8";
+
+
+/* FONT : GOOGLE nanumgothic */
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+/* COMMON */
+body {
+	font-size:15px;
+	margin:0;
+	font-family: 'Nanum Gothic', sans-serif;
+	font-weight:400;
+}
+ul, li {
+	list-style: none;
+}
+a, img {
+	border:0; 
+	text-decoration: none;
+}
+
+
+#exam {
+	width:100%;
+	text-align:center;
+	position:relative;
+}
+.detail_tab {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border-top:1px solid #e2e2e2;
+	border-bottom:none;
+}
+.detail_tab li {
+	height:80px;
+	float: left;
+	border-bottom:1px solid #939393;
+}
+.detail_tab li:not(:last-child) {width:50%;}
+.detail_tab li:first-child {
+	border-left:1px solid #e2e2e2;
+}
+.detail_tab li:last-child {
+	position:absolute;
+	left:50%;
+	right:0;
+	border-right:1px solid #e2e2e2;
+}
+.detail_tab li a {
+	display: inline-block;
+	color: #b2b2b2;
+	text-align: center;
+	text-decoration: none;
+	font-size: 20px;
+	line-height:4em;
+}
+
+.detail_tabContent {
+	display: none;
+	padding: 35px 0px 0px;
+}
+
+ul.detail_tab li.current{
+	border:1px solid #939393;
+	border-bottom:none;
+}
+ul.detail_tab li.current a{
+	color: #464646;;
+}
+.detail_tabContent.current {
+	display: block;
+	border:1px solid #939393;
+	border-top:none;
+}
+
+.detail_calInputArea {
+	height:60px;
+	width: 96%;
+	padding: 2% 8%;
+	display:inline-block;
+}
+.detail_tabContent input {
+	width:8%;
+	height:50px;
+	border-radius:5px;
+	border:1px solid #e2e2e2;
+	text-align:center;
+	color:#636363;
+	float:left;
+	padding-right:0;
+	font-size:18px;
+	font-weight:500;
+}
+.detail_calInputArea span {
+	float:left;
+	line-height:2em;
+	text-align:left;
+	padding-left:5px;
+	padding-top:0px;
+	width:6%;
+}
+.detail_tabContent input[type=button] {
+	color:#fff;
+	background:#A6A6A6;
+	cursor: pointer;
+}
+
+.detail_tabContent table {
+	width:100%;
+	border: 1px solid #e2e2e2;
+	border-collapse: collapse;
+	margin-top:25px;
+}
+
+.detail_tabContent table thead tr {
+	height:50px;
+	background:#D5D5D5;
+	border-bottom:1px solid #e2e2e2;
+}
+
+.detail_tabContent table thead th {
+	color: #3a3a3a;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.detail_tabContent table thead th:not(:last-child), 
+.detail_tabContent table tbody td:not(:last-child){
+	border-right:1px solid #e2e2e2;
+}
+
+.detail_tabContent table tbody {
+	text-align:center;
+}
+
+.detail_tabContent table tbody tr {
+	height:60px;
+}
+.detail_tabContent table tbody td span {
+
+	font-weight:500;
+	font-size:22px;
+}
+
+.multiSign { width:5%; line-height:60px; float:left; font-size:23px;}
+.detail_calExp {width:100%; height:50px; color:#3b3b3b; font-size:24px; margin-top:80px;}
+.detail_calExp img {vertical-align:bottom; padding-bottom:3px;}
+
+p {color:#626262; font-size:18px;}
+
+
+
+
+/* 모바일 */
+@media only screen and (max-width : 414px) {
+	
+	body {
+		font-size:10px;
+		margin:0;
+	}
+	
+	.detail_tab li { height:50px;}
+	
+	p {font-size:12px;}
+	
+	.detail_tabContent input,
+	.detail_tabContent table thead th {
+		font-size:14px;
+	}
+	.detail_tab li a {font-size: 16px; line-height:3em;}
+	.detail_tabContent table tbody td span {
+		font-size:18px;
+	}
+	.multiSign {font-size:19px;}
+	.detail_calExp {font-size:20px;}
+	
+	.detail_tabContent input {height:40px; width:26%;}
+	.detail_calInputArea span {line-height:1em;}
+	.multiSign {line-height:40px;}
+	
+	.detail_tabContent table thead tr {height:40px;}
+	.detail_tabContent table tbody tr {height:50px;}
+	.detail_calExp img {padding:0px;}
+}
+</style>
+
+</head>
+<body>
+
+<div class="detail_calExp">
+	<!--<img alt="tapeMeasure" src="images/tapeMeasure.png" width="38" height="25" />-->
+	&nbsp;&lt; 복층판 계산기 &gt;</div>
+<div id="exam">
+		<ul class="detail_tab">
+			<li data-tab="a" class="current"><a href="./calc.html#"><b>6T / 10T</b></a></li>
+			<li data-tab="b" class=""><a href="./calc.html#"><b>16T</b></a></li>
+			
+		</ul>
+	</div>
+	<div class="detail_tabContent" id="a">
+
+		<div class="detail_calInputArea">
+			<span style="font-size:25px;"><b>폭</b></span>
+			<input type="number" id="a_wallHeight" name="wallHeight" placeholder="폭 입력">
+			<span style="padding-top:15px;">mm</span>
+			<div class="multiSign">x</div>
+			<span style="font-size:25px;"><b>길이</b></span>
+			<input type="number" id="a_width" name="width" placeholder="길이 입력">
+			<span style="padding-top:15px;">mm</span>
+			<div class="multiSign">x</div>
+			<span style="font-size:25px;width:10%;"><b>필요한 장수</b></span>
+			<input type="number" id="a_count" name="count" placeholder="장수 입력">
+			<span style="padding-top:15px;">장</span>
+			<input type="button" id="a_" name="btnCal" value="계산하기">
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th><b>예상 총 구매수량</b></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<span id="a_product" name="product" style="	font-weight:500;font-size:18px;"></span>
+						<span id="a_quantityOp" name="quantityOp" style="color:#ff0000;">0</span> 장
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="detail_tabContent current" id="b">
+		<div class="detail_calInputArea">
+			<span style="font-size:25px;"><b>폭</b></span>
+			<input type="number" id="b_wallHeight" name="wallHeight" placeholder="폭 입력">
+			<span style="padding-top:15px;">mm</span>
+			<div class="multiSign">x</div>
+			<span style="font-size:25px;"><b>길이</b></span>
+			<input type="number" id="b_width" name="width" placeholder="길이 입력">
+			<span style="padding-top:15px;">mm</span>
+			<div class="multiSign">x</div>
+			<span style="font-size:25px;width:10%;"><b>필요한 장수</b></span>
+			<input type="number" id="b_count" name="count" placeholder="장수 입력">
+			<span style="padding-top:15px;">장</span>
+			<input type="button" id="b_" name="btnCal" value="계산하기">
+		</div>
+
+		<table>
+			<thead>
+				<tr>
+					<th><b>예상 총 구매수량</b></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<span id="b_product" name="product" style="	font-weight:500;font-size:18px;"></span>
+						<span id="b_quantityOp" name="quantityOp" style="color:#ff0000;">0</span> 장
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<p style="color:blue;"><b>&nbsp;&gt; 구매 시 참고용으로 활용 바랍니다.</b></p>
+
+</body></html>
