@@ -37,15 +37,6 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		
-		/*
-		if($("#" + aliasId + "width").val() == 0) {
-			alert("시공면의 가로길이를 입력하세요.");
-			$("#" + aliasId + "width").focus();
-			return false;
-		}
-		*/
-		
 		cal($("#" + aliasId + "wallHeight").val(), $("#" + aliasId + "width").val(), aliasId, $("#" + aliasId + "count").val());
 	});
 	
@@ -55,20 +46,32 @@ function cal(wallHeight, width, aliasId, count) {
 	
 	var product = '';
 	var temp_cal = Math.ceil(width/1000);
-
-	if ( wallHeight > 700 && wallHeight <= 1000 ) {
-		product = 1000;
-	}
-	if ( wallHeight > 1000 && wallHeight <= 1250 ) {
-		product = 1250;
-	}
-	if ( wallHeight > 1250 && wallHeight <= 2100 ) {
-		product = 2100;
-	}
-	$("#" + aliasId + "product").html(product + " mm x ");
-	$("#" + aliasId + "quantityOp").html(temp_cal * count);
-
 	
+	if ( aliasId == 'a_') {
+		if ( wallHeight >= 700 && wallHeight <= 1000 ) {
+			product = 1000;
+		}
+		if ( wallHeight > 1000 && wallHeight <= 1250 ) {
+			product = 1250;
+		}
+		if ( wallHeight > 1250 && wallHeight <= 2100 ) {
+			product = 2100;
+		}
+		$("#" + aliasId + "product").html("폭 "+product + " mm x 길이 1000mm =");
+		$("#" + aliasId + "quantityOp").html(temp_cal * count);
+	
+	} else {
+		if ( wallHeight >= 700 && wallHeight <= 1000 ) {
+			product = 1000;
+		}
+		if ( wallHeight > 1000 && wallHeight <= 2100 ) {
+			product = 2100;
+		}
+		$("#" + aliasId + "product").html("폭 "+product + " mm x 길이 1000mm =");
+		$("#" + aliasId + "quantityOp").html(temp_cal * count);
+	
+	}
+
 }
 
 function clear() {
@@ -273,7 +276,7 @@ p {color:#626262; font-size:18px;}
 </head>
 <body>
 
-<div class="detail_calExp">
+<div class="detail_calExp" style="text-align: center;">
 	<!--<img alt="tapeMeasure" src="images/tapeMeasure.png" width="38" height="25" />-->
 	&nbsp;&lt; 복층판 계산기 &gt;</div>
 <div id="exam">
@@ -283,7 +286,7 @@ p {color:#626262; font-size:18px;}
 			
 		</ul>
 	</div>
-	<div class="detail_tabContent" id="a">
+	<div class="detail_tabContent current" id="a">
 
 		<div class="detail_calInputArea">
 			<span style="font-size:25px;"><b>폭</b></span>
@@ -302,7 +305,7 @@ p {color:#626262; font-size:18px;}
 		<table>
 			<thead>
 				<tr>
-					<th><b>예상 총 구매수량</b></th>
+					<th><b>예상 총 구매수량 (재단사이즈 미 기재시 1000mm 으로 배송됨)</b></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -315,7 +318,7 @@ p {color:#626262; font-size:18px;}
 			</tbody>
 		</table>
 	</div>
-	<div class="detail_tabContent current" id="b">
+	<div class="detail_tabContent" id="b">
 		<div class="detail_calInputArea">
 			<span style="font-size:25px;"><b>폭</b></span>
 			<input type="number" id="b_wallHeight" name="wallHeight" placeholder="폭 입력">
@@ -334,7 +337,7 @@ p {color:#626262; font-size:18px;}
 		<table>
 			<thead>
 				<tr>
-					<th><b>예상 총 구매수량</b></th>
+					<th><b>예상 총 구매수량 (재단사이즈 미 기재시 1000mm 으로 배송됨)</b></th>
 				</tr>
 			</thead>
 			<tbody>
