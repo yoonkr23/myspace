@@ -165,11 +165,11 @@ ul.detail_tab li.current a{
 .detail_calInputArea {
 	height:60px;
 	width: 96%;
-	padding: 2% 8%;
+	padding: 2% 2%;
 	display:inline-block;
 }
 .detail_tabContent input {
-	width:8%;
+	width:12%;
 	height:50px;
 	border-radius:5px;
 	border:1px solid #e2e2e2;
@@ -184,14 +184,16 @@ ul.detail_tab li.current a{
 	float:left;
 	line-height:2em;
 	text-align:left;
-	padding-left:5px;
-	padding-top:0px;
-	width:6%;
+	padding-left:2px;
+	padding-top:10px;
+	width:3%;
 }
 .detail_tabContent input[type=button] {
+	width:12%;
 	color:#fff;
 	background:#A6A6A6;
 	cursor: pointer;
+	text-align:center;
 }
 
 .detail_tabContent table {
@@ -231,7 +233,7 @@ ul.detail_tab li.current a{
 	font-size:22px;
 }
 
-.multiSign { width:5%; line-height:60px; float:left; font-size:23px;}
+.multiSign { width:3%; line-height:60px; float:left; font-size:15px;}
 .detail_calExp {width:100%; height:50px; color:#3b3b3b; font-size:24px; margin-top:80px;}
 .detail_calExp img {vertical-align:bottom; padding-bottom:3px;}
 
@@ -289,18 +291,19 @@ p {color:#626262; font-size:18px;}
 	<div class="detail_tabContent current" id="a">
 
 		<div class="detail_calInputArea">
-			<span style="font-size:15px;"><b>폭</b></span>
+			<span style="font-size:17px; width:3%;"><b>폭</b></span>
 			<input type="number" id="a_wallHeight" name="wallHeight" placeholder="폭 입력">
 			<span style="padding-top:15px;">mm</span>
-			<div class="multiSign">x</div>
-			<span style="font-size:15px;"><b>길이</b></span>
+			<span style="padding-top:15px;padding-left:30px;">X</span>
+			<span style="font-size:17px; width:5%;padding-left:10px;"><b>길이</b></span>
 			<input type="number" id="a_width" name="width" placeholder="길이 입력">
 			<span style="padding-top:15px;">mm</span>
-			<div class="multiSign">x</div>
-			<span style="font-size:15px;width:10%;"><b>필요한 장수</b></span>
+			<span style="padding-top:15px;padding-left:30px;">X</span>
+			<span style="font-size:17px;width:12%;padding-left:10px;"><b>필요 장수</b></span>
 			<input type="number" id="a_count" name="count" placeholder="장수 입력">
 			<span style="padding-top:15px;">장</span>
-			<input type="button" id="a_" name="btnCal" value="계산하기">
+			<span style="width: 2%;"></span>
+			<input type="button" id="a_" name="btnCal" value="계산">
 		</div>
 		<table>
 			<thead>
@@ -320,18 +323,19 @@ p {color:#626262; font-size:18px;}
 	</div>
 	<div class="detail_tabContent" id="b">
 		<div class="detail_calInputArea">
-			<span style="font-size:15px;"><b>폭</b></span>
+			<span style="font-size:17px; width:3%;"><b>폭</b></span>
 			<input type="number" id="b_wallHeight" name="wallHeight" placeholder="폭 입력">
 			<span style="padding-top:15px;">mm</span>
-			<div class="multiSign">x</div>
-			<span style="font-size:15px;"><b>길이</b></span>
+			<span style="padding-top:15px;padding-left:30px;">X</span>
+			<span style="font-size:17px; width:5%;padding-left:10px;"><b>길이</b></span>
 			<input type="number" id="b_width" name="width" placeholder="길이 입력">
 			<span style="padding-top:15px;">mm</span>
-			<div class="multiSign">x</div>
-			<span style="font-size:15px;width:10%;"><b>필요한 장수</b></span>
+			<span style="padding-top:15px;padding-left:30px;">X</span>
+			<span style="font-size:17px;width:12%;padding-left:10px;"><b>필요 장수</b></span>
 			<input type="number" id="b_count" name="count" placeholder="장수 입력">
 			<span style="padding-top:15px;">장</span>
-			<input type="button" id="b_" name="btnCal" value="계산하기">
+			<span style="width: 2%;"></span>
+			<input type="button" id="b_" name="btnCal" value="계산">
 		</div>
 
 		<table>
